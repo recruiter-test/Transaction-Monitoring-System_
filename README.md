@@ -1,4 +1,4 @@
-# Banking Application
+# Banking Application 
 
 A full-stack banking application built with React (frontend) and Express + MongoDB (backend).
 
