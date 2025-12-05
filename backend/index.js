@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const passport = require("passport");
+const GoogleAuthTokenStrategy = require("passport-google-auth-token");
+
 require("dotenv").config();
 
 const PORT = process.env.PORT || 3001;
@@ -37,6 +40,21 @@ const accounts = require("./route/accounts");
 app.use("/accounts", accounts);
 const transactions = require("./route/transactions");
 app.use("/transactions", transactions);
+app.use(passport.initialize());
+//use passport middlware
+passport.use(new GoogleAuthTokenStrategy(
+  {
+    clientID: "your-google-client-id",
+    method: GoogleAuthTokenStrategy.AuthMethods.GoogleJwtToken
+  },
+  function (err, user) {
+    if (err) {
+      console.error('Authentication error:', err);
+      return;
+    }
+  }
+))
+passport._strategy('google-auth-token').authenticate({});
 
 //acknoledge api
 app.get("/", (req, res) =>

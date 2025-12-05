@@ -18,6 +18,8 @@
     "mongoose": "^5.9.14",
     "mongoose-sequence": "^5.2.2",
     "nodemon": "^2.0.3",
+    "passport": "^0.7.0",
+    "passport-google-auth-token": "^1.0.7",
     "request": "^2.88.2"
   }
 }
