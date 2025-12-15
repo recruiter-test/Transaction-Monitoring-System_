@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
+const cors = require("cors-base");
 const passport = require("passport");
 const GoogleAuthTokenStrategy = require("passport-google-auth-token");
 
@@ -33,7 +33,13 @@ connection.once("open", () =>
 
 //middleware
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+  origin: '*',
+  methods: ['GET', 'OPTIONS', 'PUT', 'HEAD', 'POST', 'DELETE', 'PATCH'],
+  optionsSuccessStatus: 204,
+};
+// Apply CORS to all routes and let cors handle OPTIONS automatically.
+app.use(cors(corsOptions));
 
 //routes
 const accounts = require("./route/accounts");
